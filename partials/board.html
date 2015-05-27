@@ -1,0 +1,13 @@
+<div id='board'>
+	<nywton-chessgame
+	  data-game="game"
+	  data-board="board"
+	  data-position="'start'"
+	  data-draggable='true'
+	  on-drop='droppedBro'
+	  on-move-end='moveEndedBro'
+	></nywton-chessgame>
+</div>
+<button ng-click='move()'>step up</button>
+<br />
+<button ng-click='confirm()' class='btn'>Confirm</button>

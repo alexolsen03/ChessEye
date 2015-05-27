@@ -1,0 +1,129 @@
+@mixin rounded($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+          border-radius: $radius;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+     -moz-box-shadow: $x $y $blur $color;
+          box-shadow: $x $y $blur $color;
+}
+@mixin shadow-inset($x, $y, $blur, $color) {
+  -webkit-box-shadow: inset $x $y $blur $color;
+     -moz-box-shadow: inset $x $y $blur $color;
+          box-shadow: inset $x $y $blur $color;
+}
+@mixin transition($property, $time, $style: ease){
+  -webkit-transition: $property $time $style;
+     -moz-transition: $property $time $style;
+       -o-transition: $property $time $style;
+          transition: $property $time $style;
+}
+@mixin transition-in($property, $style: ease){
+  -webkit-transition: $property .8s $style;
+     -moz-transition: $property .8s $style;
+       -o-transition: $property .8s $style;
+          transition: $property .8s $style;
+}
+@mixin transition-away($property, $style: ease) {
+  -webkit-transition: $property .2s $style;
+     -moz-transition: $property .2s $style;
+       -o-transition: $property .2s $style;
+          transition: $property .2s $style;
+}
+@mixin transform($property, $duration, $timing: linear, $delay: 0s) {
+  -webkit-transform: $property $duration $timing $delay;
+     -moz-transform: $property $duration $timing $delay;
+       -o-transform: $property $duration $timing $delay;
+          transform: $property $duration $timing $delay;
+}
+@mixin transform-origin ($origin) {
+  -webkit-transform-origin: $origin;
+     -moz-transform-origin: $origin;
+       -o-transform-origin: $origin;
+          transform-origin: $origin;
+}
+@mixin transform-3d($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l, $m, $n, $o, $p){
+  -webkit-transform: matrix3d($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l, $m, $n, $o, $p);
+     -moz-transform: matrix3d($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l, $m, $n, $o, $p);
+       -o-transform: matrix3d($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l, $m, $n, $o, $p);
+          transform: matrix3d($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l, $m, $n, $o, $p);
+
+  -webkit-transform-style: preserve-3d;
+     -moz-transform-style: preserve-3d;
+       -o-transform-style: preserve-3d;
+          transform-style: preserve-3d;      
+}
+@mixin perspective($val) {
+  -webkit-perspective: $val; 
+  -moz-perspective: $val; 
+  -ms-perspective: $val; 
+  perspective: $val;
+}
+@mixin perspective-origin($val){
+  -webkit-perspective-origin: $val;
+  -moz-perspective-origin: $val;
+  -ms-perspective-origin: $val;
+  perspective-origin: $val;
+}
+@mixin box-sizing {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+@mixin linear-gradient($from, $to) {
+  /* Fallback for sad browsers */
+  background-color: $to;
+  /* Mozilla Firefox */
+  background-image:    -moz-linear-gradient($from, $to);
+  /* Opera */
+  background-image:      -o-linear-gradient($from, $to);
+  /* WebKit (Chrome 11+) */
+  background-image:        -webkit-gradient(linear, » 
+    left top, left bottom, color-stop(0, $from), » 
+    color-stop(1, $to));
+  /* WebKit (Safari 5.1+, Chrome 10+) */
+  background-image: -webkit-linear-gradient($from, $to);
+  /* IE10 */
+  background-image:   -ms-linear-gradient($from, $to);
+  /* W3C */
+  background-image:       linear-gradient($from, $to);
+}
+@mixin center-wrapper($width){
+  width: $width;
+  margin: 0px auto;
+}
+
+/* Animations */
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}

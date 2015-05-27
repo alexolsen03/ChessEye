@@ -1,0 +1,13 @@
+@import "../css/reset.css";
+@import "../css/fonts.css";
+
+/* Base SCSS libraries */
+@import "base/variables.scss";
+@import "base/mixins.scss";
+@import "base/animations.scss";
+@import "base/global.scss";
+
+/* Project Specific Files */
+@import "styles/global.scss";
+@import "styles/board-screen.scss";
+@import "styles/notation-screen.scss";

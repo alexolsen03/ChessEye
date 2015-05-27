@@ -1,0 +1,15 @@
+<div id="notation">
+	<div id='numOfMoves'>
+		<i class='fa fa-arrow-up' ng-click='incrementCtr()'></i> {{ numOfMoves }} <i class='fa fa-arrow-down' ng-click='decrementCtr()'></i>
+	</div>
+	<div ng-repeat='move in notations'>
+		<div class='game-notation'>
+			<span class='move-no'>   {{ move.moveNo }}.</span>
+			<span class='movement'>  {{ move.moves[0]  }}</span>
+			<span class='movement'>  {{ move.moves[1] }} </span>
+		</div>
+	</div>
+	<div class='align-c'>
+		<button class='confirm-btn btn' ui-sref='board({notations: notations})'>Make it!</button>
+	</div>
+</div>
