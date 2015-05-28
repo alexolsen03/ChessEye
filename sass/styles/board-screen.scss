@@ -1,6 +1,13 @@
-#board{
-	height: 500px;
-	width: 500px;
-	margin: 0px auto;
-	padding-top: 60px;
+.board-wrapper{
+
+	#board{
+		height: 475px;
+		width: 475px;
+		margin: 0px auto;
+		padding-top: 20px;
+	}
+
+	.confirm{
+		margin: 20px 0px;
+	}
 }

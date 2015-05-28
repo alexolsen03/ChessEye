@@ -3,4 +3,62 @@ body{
 	color: $color-main;
 
 	@include transition(background-color, 0.4s);
+
+	.header{
+		padding: 8px 0px;
+
+		background-color: $color-main-light;
+		font-size: 16pt;
+		font-family: $font-body-bold;
+		color: $color-nuetral;
+	}
+
+	.confirm{
+		margin: 40px 0px;
+
+		color: $color-main;
+		@include transition(color, 0.2s);
+
+		&:hover{
+			cursor: pointer;
+
+			color: #444;
+			@include transition(color, 0.4s);
+		}
+	}
 }
+
+
+//NG ANIMATE ANIMATIONS
+
+.animate
+{ 
+	-webkit-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	-moz-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	-ms-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	-o-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	
+	position: relative;
+	display: block;
+	overflow: hidden;
+	text-overflow: clip;
+	white-space:nowrap;
+} 
+
+.animate.ng-enter,
+.animation.ng-leave.ng-leave-active {
+	opacity: 0;
+	// width: 0px;
+	// height: 0px;
+}
+
+.animate.ng-leave,
+.animation.ng-enter.ng-enter-active{
+	opacity: 1;
+	// width: 150px;
+	// height: 30px;
+}
+
+
+

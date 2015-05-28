@@ -1,4 +1,4 @@
-var app = angular.module("ChessEye", ['nywton.chess', 'ui.router']);
+var app = angular.module("ChessEye", ['nywton.chess', 'ui.router', 'ngAnimate']);
 
 app.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise('/notation');

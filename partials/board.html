@@ -1,13 +1,17 @@
-<div id='board'>
-	<nywton-chessgame
-	  data-game="game"
-	  data-board="board"
-	  data-position="'start'"
-	  data-draggable='true'
-	  on-drop='droppedBro'
-	  on-move-end='moveEndedBro'
-	></nywton-chessgame>
+<div class='board-wrapper'>
+	<div id='board'>
+		<nywton-chessgame
+		  data-game="game"
+		  data-board="board"
+		  data-position="'start'"
+		  data-draggable='true'
+		  on-drop='droppedBro'
+		  on-move-end='moveEndedBro'
+		></nywton-chessgame>
+	</div>
+	<br />
+	<div>
+		<i ng-if='!hasConfirmed' ng-click='confirm()' class='confirm fa-3x fa fa-play-circle'></i>
+		<i ng-if='hasConfirmed' ui-sref='notation'class='confirm fa-3x fa fa-refresh'></i>
+	</div>
 </div>
-<button ng-click='move()'>step up</button>
-<br />
-<button ng-click='confirm()' class='btn'>Confirm</button>

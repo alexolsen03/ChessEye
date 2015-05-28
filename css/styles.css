@@ -317,42 +317,86 @@ body {
   -moz-transition: background-color 0.4s ease;
   -o-transition: background-color 0.4s ease;
   transition: background-color 0.4s ease; }
-
-#board {
-  height: 500px;
-  width: 500px;
-  margin: 0px auto;
-  padding-top: 60px; }
-
-#notation {
-  display: inline-block;
-  text-align: left;
-  font-family: OpenSans; }
-  #notation #numOfMoves {
-    padding: 20px 0px;
-    color: #bdc3c7;
+  body .header {
+    padding: 8px 0px;
+    background-color: #bdc3c7;
     font-size: 16pt;
-    text-align: center;
+    font-family: OpenSansBold;
+    color: #ecf0f1; }
+  body .confirm {
+    margin: 40px 0px;
+    color: #95a5a6;
     -webkit-transition: color 0.2s ease;
     -moz-transition: color 0.2s ease;
     -o-transition: color 0.2s ease;
     transition: color 0.2s ease; }
-    #notation #numOfMoves:hover {
-      color: #95a5a6;
-      -webkit-transition: color 0.5s ease;
-      -moz-transition: color 0.5s ease;
-      -o-transition: color 0.5s ease;
-      transition: color 0.5s ease; }
-  #notation .game-notation {
-    padding: 10px 0px;
-    font-size: 28pt; }
-    #notation .game-notation .move-no {
-      font-size: 22pt;
-      color: #bdc3c7; }
-    #notation .game-notation .movement {
-      display: inline-block;
-      width: 100px; }
-  #notation .confirm-btn {
-    margin: 40px 0px; }
+    body .confirm:hover {
+      cursor: pointer;
+      color: #444;
+      -webkit-transition: color 0.4s ease;
+      -moz-transition: color 0.4s ease;
+      -o-transition: color 0.4s ease;
+      transition: color 0.4s ease; }
+
+.animate {
+  -webkit-transition: 100ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  -moz-transition: 100ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  -ms-transition: 100ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  -o-transition: 100ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  transition: 100ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap; }
+
+.animate.ng-enter,
+.animation.ng-leave.ng-leave-active {
+  opacity: 0; }
+
+.animate.ng-leave,
+.animation.ng-enter.ng-enter-active {
+  opacity: 1; }
+
+.board-wrapper #board {
+  height: 475px;
+  width: 475px;
+  margin: 0px auto;
+  padding-top: 20px; }
+.board-wrapper .confirm {
+  margin: 20px 0px; }
+
+.notation-wrapper {
+  text-align: center; }
+  .notation-wrapper #notation {
+    display: inline-block;
+    text-align: left;
+    font-family: OpenSans; }
+    .notation-wrapper #notation #numOfMoves {
+      padding: 20px 0px;
+      color: #bdc3c7;
+      font-size: 16pt;
+      text-align: center;
+      -webkit-transition: color 0.2s ease;
+      -moz-transition: color 0.2s ease;
+      -o-transition: color 0.2s ease;
+      transition: color 0.2s ease; }
+      .notation-wrapper #notation #numOfMoves:hover {
+        color: #95a5a6;
+        -webkit-transition: color 0.5s ease;
+        -moz-transition: color 0.5s ease;
+        -o-transition: color 0.5s ease;
+        transition: color 0.5s ease; }
+      .notation-wrapper #notation #numOfMoves i {
+        cursor: pointer; }
+    .notation-wrapper #notation .game-notation {
+      padding: 10px 0px;
+      font-size: 28pt; }
+      .notation-wrapper #notation .game-notation .move-no {
+        font-size: 22pt;
+        color: #bdc3c7; }
+      .notation-wrapper #notation .game-notation .movement {
+        display: inline-block;
+        width: 140px; }
 
 /*# sourceMappingURL=styles.css.map */
