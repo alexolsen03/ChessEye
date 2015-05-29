@@ -10,8 +10,11 @@
 		></nywton-chessgame>
 	</div>
 	<br />
-	<div>
+	<div class='board-width'>
 		<i ng-if='!hasConfirmed' ng-click='confirm()' class='confirm fa-3x fa fa-play-circle'></i>
+		<i ng-if='hasConfirmed' ng-click='stepBack()' class='fa fa-3x fa-chevron-circle-left arrow-left'></i>
 		<i ng-if='hasConfirmed' ui-sref='notation'class='confirm fa-3x fa fa-refresh'></i>
+		<i ng-if='hasConfirmed' ng-click='stepForward()' class='fa fa-3x fa-chevron-circle-right arrow-right'></i>
+		<div class='clearme'></div>
 	</div>
 </div>

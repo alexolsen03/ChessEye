@@ -7,7 +7,7 @@ app.controller("MasterController", function($scope){
 app.controller("MainController", function($scope, $http){
 	$scope.$parent.answerPGN = null;
 	var arrOfTurns = [];
-	$scope.numOfMoves = 3;
+	$scope.$parent.numOfMoves = 3;
 	$scope.loading = true;
 
 	$http.jsonp("http://en.lichess.org/api/game?username=NevSky&nb=1000&with_moves=1&rated=1&callback=JSON_CALLBACK")
@@ -23,13 +23,13 @@ app.controller("MainController", function($scope, $http){
 			});
 
 	$scope.incrementCtr = function(){
-		if($scope.numOfMoves < 10)
-			$scope.numOfMoves++;
+		if($scope.$parent.numOfMoves < 10)
+			$scope.$parent.numOfMoves++;
 	}
 
 	$scope.decrementCtr = function(){
-		if($scope.numOfMoves > 1)
-			$scope.numOfMoves--;
+		if($scope.$parent.numOfMoves > 1)
+			$scope.$parent.numOfMoves--;
 	}
 
 	// function setNotations(){
@@ -53,20 +53,50 @@ app.controller("BoardController",['$scope', '$state', function($scope, $state){
 	$scope.stepNum = 0;
 
 	$scope.confirm = function(){
-		// var answer = notationToPGN();
-		// var answerArr = getAnswerNotationArray();
 		$scope.hasConfirmed = true;
 		$scope.toTestPGN = new Game($scope.game.pgn());
 
-		// if(answer.trim() == $scope.game.pgn().trim()){
-		// 	correct();
-		// }else{
-		// 	fail(answer, answerArr);
-		// }
-		if($scope.toTestPGN.pgn == $scope.$parent.answerPGN.pgn)
+		console.log('testing equality between: ');
+		console.log($scope.toTestPGN.pgn);
+		console.log($scope.$parent.answerPGN.pgn);
+
+		var isMatch = true;
+		for(var i=0; i<$scope.$parent.numOfMoves; i++){
+			if($scope.toTestPGN.stepByStep[i] != $scope.$parent.answerPGN.stepByStep[i]){
+				isMatch = false;
+				console.log($scope.toTestPGN.stepByStep[i] + ' is not ' + $scope.$parent.answerPGN.stepByStep[i]);
+				break;
+			}else{
+				console.log('true');
+			}
+		}
+
+		if(isMatch)
 			correct();
 		else
 			fail();
+	}
+
+	$scope.stepForward = function(){
+		$($scope.prevSquare).css('background-color', $scope.prevColor); 
+
+		var gameHistory = $scope.game.history({verbose: true});
+		if($scope.stepNum < gameHistory.length){
+			var nextMove = gameHistory[$scope.stepNum].from + '-' + gameHistory[$scope.stepNum].to;
+			$scope.board.move(nextMove);
+			$scope.stepNum++;
+		}
+	}
+
+	$scope.stepBack = function(){
+		$($scope.prevSquare).css('background-color', $scope.prevColor); 
+
+		var gameHistory = $scope.game.history({verbose: true});
+		if($scope.stepNum > 0){
+			$scope.stepNum--;
+			var nextMove = gameHistory[$scope.stepNum].to + '-' + gameHistory[$scope.stepNum].from;
+			$scope.board.move(nextMove);
+		}
 	}
 
 //	function fail(pgn, pgnArr){
@@ -75,7 +105,7 @@ app.controller("BoardController",['$scope', '$state', function($scope, $state){
 		$('body').css('background-color', 'red');
 		setTimeout(function(){
 		 	$('body').css('background-color', '#ecf0f1');
-		}, 400);
+		}, 500);
 
 		$scope.board.start();
 		$scope.game.reset();
@@ -93,7 +123,7 @@ app.controller("BoardController",['$scope', '$state', function($scope, $state){
 		   	  $($scope.prevSquare).css('background-color', $scope.prevColor); 
 		      move(gameHistory);                        
 		      if (--i) myLoop(i);      
-		   }, 500)
+		   }, 700)
 		})($scope.$parent.numOfMoves * 2);  
 
 		// setTimeout(function(){

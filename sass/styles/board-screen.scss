@@ -10,4 +10,33 @@
 	.confirm{
 		margin: 20px 0px;
 	}
+
+	.board-width{
+		width: 475px;
+		margin: 0px auto;
+
+		.arrow-left,
+		.arrow-right{
+			padding: 19px 0px;
+
+			cursor: pointer;
+			color: $color-main;
+			@include transition(color, 0.2s);
+
+			&:hover{
+				cursor: pointer;
+
+				color: #444;
+				@include transition(color, 0.4s);
+			}
+		}
+
+		.arrow-left{
+			float: left;
+		}
+
+		.arrow-right{
+			float: right;
+		}
+	}
 }
