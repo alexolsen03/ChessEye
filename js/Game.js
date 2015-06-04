@@ -12,6 +12,7 @@ Game.prototype.create = function(){
 Game.prototype.createTurnByTurn = function(){
 	var turnByTurn = '';
 
+	//Test if this is a true pgn or just moves
 	if(this.pgn.indexOf('.') == -1){
 		turnByTurn = this.pgn.match(/[^ ]+( +[^ ]+){0,1}/g);
 	}
@@ -20,11 +21,6 @@ Game.prototype.createTurnByTurn = function(){
 		console.log(temp);
 		turnByTurn = temp.match(/[^ ]+( +[^ ]+){0,1}/g);
 	}
-
-	// var tester = this.pgn.match(/(\d\. )/g);
-	// console.log(tester);
-
-	// var turnByTurn = this.pgn.match(/[^ ]+( +[^ ]+){0,1}/g);
 
 	console.log('created turnByTurn');
 	console.log(turnByTurn);
@@ -49,4 +45,22 @@ Game.prototype.createStepByStep = function(){
 	console.log(stepByStep);
 
 	return stepByStep;
+}
+
+Game.prototype.getPgnUpToMove = function(moveNo){
+	var pgnStr = '';
+	var turn = 1;
+	for(var i=0; i<moveNo; i+=2){
+		var moveW = this.stepByStep[i];
+		var moveB = this.stepByStep[i+1];
+
+		pgnStr += moveW + ' ' + moveB + ' ';
+
+		turn++;
+	}
+
+	console.log('pgn up to move ' + moveNo + ' is ');
+	console.log(pgnStr);
+	return pgnStr.trim();
+
 }

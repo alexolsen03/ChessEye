@@ -3,15 +3,17 @@
 
 	#notation{
 		display: inline-block;
+		padding: 0px 150px;
 
 		text-align: left;
 		font-family: $font-body;
+		background-color: $color-white-transparent;
 
 		#numOfMoves{
 			padding: 20px 0px;
 
 			color: $color-main-light;
-			font-size: 16pt;
+			font-size: 18pt;
 			text-align: center;
 
 			@include transition(color, 0.2s);
@@ -45,3 +47,22 @@
 
 	}
 }
+
+.lightbox{
+	background-color: $color-white;
+	
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
+
+	border-left: 10px solid $color-white-transparent;
+	border-right: 10px solid $color-white-transparent;
+	border-bottom: 10px solid $color-white-transparent;
+
+	@include rounded(0px, 0px, 10px, 10px);
+
+	padding: 30px;
+	text-align: center;
+	display: inline-block;
+}
+

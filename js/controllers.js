@@ -4,22 +4,25 @@ app.controller("MasterController", function($scope){
 	$scope.answerPGN = null;
 });
 
+/*****************
+	CONTROLLER FOR THE NOTATIONS PAGE
+******************/
 app.controller("MainController", function($scope, $http){
-	$scope.$parent.answerPGN = null;
 	var arrOfTurns = [];
-	$scope.$parent.numOfMoves = 3;
+
 	$scope.loading = true;
+
+	$scope.$parent.answerPGN  = null;
+	$scope.$parent.numOfMoves = 3;
 
 	$http.jsonp("http://en.lichess.org/api/game?username=NevSky&nb=1000&with_moves=1&rated=1&callback=JSON_CALLBACK")
 			.success(function(data){
-				var randNum = Math.floor((Math.random() * data.list.length) + 1);
-			    var game = data.list[randNum];
-			    var moves = game.moves;
-//			    arrOfTurns = moves.match(/[^ ]+( +[^ ]+){0,1}/g);
+				var randNum = Math.floor((Math.random() * data.list.length) + 1),
+			        game    = data.list[randNum],
+			        moves   = game.moves; //note, could pass 'verbose' option here
 
 			    $scope.$parent.answerPGN = new Game(moves);
 			    $scope.loading = false;
-//				setNotations();
 			});
 
 	$scope.incrementCtr = function(){
@@ -31,23 +34,12 @@ app.controller("MainController", function($scope, $http){
 		if($scope.$parent.numOfMoves > 1)
 			$scope.$parent.numOfMoves--;
 	}
-
-	// function setNotations(){
-	// 	var formattedMoves = [];
-	//     for(var i=0; (i<$scope.numOfMoves && i<arrOfTurns.length); i++){
-
-	//     	var moveObj = {
-	//     		'moveNo': i + 1,
-	//     		'moves' : arrOfTurns[i].split(' ')
-	//     	}
-
-	// 		formattedMoves.push(moveObj);
-	//     }
-
-	//     $scope.$parent.notations = formattedMoves;
-	// }
 });
 
+
+/*****************
+	CONTROLLER FOR THE BOARD PAGE
+******************/
 app.controller("BoardController",['$scope', '$state', function($scope, $state){
 	$scope.hasConfirmed = false;
 	$scope.stepNum = 0;
@@ -56,9 +48,8 @@ app.controller("BoardController",['$scope', '$state', function($scope, $state){
 		$scope.hasConfirmed = true;
 		$scope.toTestPGN = new Game($scope.game.pgn());
 
-		console.log('testing equality between: ');
-		console.log($scope.toTestPGN.pgn);
-		console.log($scope.$parent.answerPGN.pgn);
+		console.log($scope.board);
+		console.log($scope.game);
 
 		var isMatch = true;
 		for(var i=0; i<$scope.$parent.numOfMoves; i++){
@@ -66,10 +57,10 @@ app.controller("BoardController",['$scope', '$state', function($scope, $state){
 				isMatch = false;
 				console.log($scope.toTestPGN.stepByStep[i] + ' is not ' + $scope.$parent.answerPGN.stepByStep[i]);
 				break;
-			}else{
-				console.log('true');
 			}
 		}
+
+		console.log($scope.board.fen());
 
 		if(isMatch)
 			correct();
@@ -92,23 +83,51 @@ app.controller("BoardController",['$scope', '$state', function($scope, $state){
 		$($scope.prevSquare).css('background-color', $scope.prevColor); 
 
 		var gameHistory = $scope.game.history({verbose: true});
+		var turn = gameHistory[$scope.stepNum - 1];
+
 		if($scope.stepNum > 0){
 			$scope.stepNum--;
-			var nextMove = gameHistory[$scope.stepNum].to + '-' + gameHistory[$scope.stepNum].from;
+			var nextMove = turn.to + '-' + turn.from;
+			//TODO need to replace taken pieces
+
 			$scope.board.move(nextMove);
+
+			if(turn.captured != null){
+				var capturedColor = turn.color == 'w' ? 'b' : 'w';
+				var capturedPiece = {
+					type: turn.captured,
+					color: capturedColor
+				}
+
+				console.log('captured piece was: ');
+				console.log(capturedPiece);
+
+				console.log('putting it at ' + turn.to);
+
+//				$scope.board.position($scope.$parent.answerPGN.getPgnUpToMove($scope.stepNum), false);
+
+//				console.log($scope.game.put(capturedPiece, turn.to));
+//				$scope.game.load($scope.game.fen());
+				 var oldPosition = $scope.board.position();
+				 var newPosition = oldPosition;
+				 newPosition[turn.to] = capturedPiece.type.toUpperCase();
+				 var fenPos = objToFen(newPosition);
+				 $scope.board.position(newPosition, false);
+				// console.log($scope.board.position(newPosition, false));
+				// console.log($scope.board.position());
+				//turn.to needs the captured piece put on it
+			}else{
+				console.log('turn.captured is null');
+			}
+
 		}
 	}
 
-//	function fail(pgn, pgnArr){
 	function fail(){
-		console.log('failed..');
-		$('body').css('background-color', 'red');
-		setTimeout(function(){
-		 	$('body').css('background-color', '#ecf0f1');
-		}, 500);
+		flashBackground('red');
 
 		$scope.board.start();
-		$scope.game.reset();
+		$scope.game. reset();
 
 		$scope.game.load_pgn($scope.$parent.answerPGN.pgn);
 		var gameHistory = $scope.game.history({verbose: true});
@@ -125,10 +144,13 @@ app.controller("BoardController",['$scope', '$state', function($scope, $state){
 		      if (--i) myLoop(i);      
 		   }, 700)
 		})($scope.$parent.numOfMoves * 2);  
+	}
 
-		// setTimeout(function(){
-		// 	$state.transitionTo('notation', null, {reload: true});
-		// }, 5000);
+	function flashBackground(color){
+		$('.lightbox').css('background-color', color);
+		setTimeout(function(){
+		 	$('.lightbox').css('background-color', 'white');
+		}, 500);
 	}
 
 	function move(gameHistory){
@@ -151,36 +173,64 @@ app.controller("BoardController",['$scope', '$state', function($scope, $state){
 	}
 
 	function correct(){
-		console.log('correct..');
-		$('body').css('background-color', 'green');
-		setTimeout(function(){
-			$('body').css('background-color', '#ecf0f1');
-			$state.transitionTo('notation', null, {reload: true});
-		}, 400);
+		flashBackground('green');
 	}
 
-	function notationToPGN(){
-		var pgn = '';
+	function objToFen(obj) {
+	  // if (validPositionObject(obj) !== true) {
+	  //   console.log('objToFen is false!');
+	  //   return false;
+	  // }
+	  var COLUMNS = 'abcdefgh'.split('');
 
-		console.log($scope.$parent.notations);
+	  var fen = '';
 
-		for(var obj in $scope.$parent.notations){
-			var move = $scope.$parent.notations[obj];
-			pgn += move.moveNo + '. ' + move.moves[0] + ' ' + move.moves[1] + ' ';
-		}
+	  var currentRow = 8;
+	  for (var i = 0; i < 8; i++) {
+	    for (var j = 0; j < 8; j++) {
+	      var square = COLUMNS[j] + currentRow;
 
-		console.log('returning pgn of: ' + pgn);
-		return pgn;
+	      // piece exists
+	      if (obj.hasOwnProperty(square) === true) {
+	        fen += pieceCodeToFen(obj[square]);
+	      }
+
+	      // empty space
+	      else {
+	        fen += '1';
+	      }
+	    }
+
+	    if (i !== 7) {
+	      fen += '/';
+	    }
+
+	    currentRow--;
+	  }
+
+	  // squeeze the numbers together
+	  // haha, I love this solution...
+	  fen = fen.replace(/11111111/g, '8');
+	  fen = fen.replace(/1111111/g, '7');
+	  fen = fen.replace(/111111/g, '6');
+	  fen = fen.replace(/11111/g, '5');
+	  fen = fen.replace(/1111/g, '4');
+	  fen = fen.replace(/111/g, '3');
+	  fen = fen.replace(/11/g, '2');
+
+	  return fen;
 	}
 
-	function getAnswerNotationArray(){
-		var allMoves = [];
-		for(var i=0; i<$scope.$parent.notations; i++){
-			var move = $scope.$parent.notations[i];
-			var moveStr = move.moveNo + '. ' + move.moves[0] + ' ' + move.moves[1] + ' ';
-			allMoves[i] = moveStr;
-		}
+	// convert bP, wK, etc code to FEN structure
+function pieceCodeToFen(piece) {
+  var tmp = piece.split('');
 
-		return allMoves;
-	}
+  // white piece
+  if (tmp[0] === 'w') {
+    return tmp[1].toUpperCase();
+  }
+
+  // black piece
+  return tmp[1].toLowerCase();
+}
 }]);

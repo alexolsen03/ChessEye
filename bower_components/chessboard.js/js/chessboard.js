@@ -40,14 +40,21 @@ function validPieceCode(code) {
 
 // TODO: this whole function could probably be replaced with a single regex
 function validFen(fen) {
+  console.log('validating fen of: ');
+  console.log(fen);
   if (typeof fen !== 'string') return false;
 
+  console.log('ok1');
   // cut off any move, castling, etc info from the end
   // we're only interested in position information
   fen = fen.replace(/ .+$/, '');
 
+  console.log('fen now looks like: ' + fen);
+
   // FEN should be 8 sections separated by slashes
   var chunks = fen.split('/');
+
+  console.log('chunks is.. ' + chunks);
   if (chunks.length !== 8) return false;
 
   // check the piece sections
@@ -144,6 +151,7 @@ function fenToObj(fen) {
 // returns false if the obj is not a valid position object
 function objToFen(obj) {
   if (validPositionObject(obj) !== true) {
+    console.log('objToFen is false!');
     return false;
   }
 
@@ -993,19 +1001,27 @@ function calculatePositionFromMoves(position, moves) {
 }
 
 function setCurrentPosition(position) {
+  console.log('setting current position');
+
   var oldPos = deepCopy(CURRENT_POSITION);
   var newPos = deepCopy(position);
   var oldFen = objToFen(oldPos);
   var newFen = objToFen(newPos);
 
+  console.log('entering setCurrentPosition');
+
   // do nothing if no change in position
   if (oldFen === newFen) return;
+
+  console.log('i guess they are different');
 
   // run their onChange function
   if (cfg.hasOwnProperty('onChange') === true &&
     typeof cfg.onChange === 'function') {
     cfg.onChange(oldPos, newPos);
   }
+
+  console.log('actually updating');
 
   // update state
   CURRENT_POSITION = position;
@@ -1392,6 +1408,8 @@ widget.position = function(position, useAnimation) {
     return objToFen(CURRENT_POSITION);
   }
 
+  console.log('got past second if..?');
+
   // default for useAnimations is true
   if (useAnimation !== false) {
     useAnimation = true;
@@ -1404,7 +1422,10 @@ widget.position = function(position, useAnimation) {
 
   // convert FEN to position object
   if (validFen(position) === true) {
+    console.log('is valid fen');
     position = fenToObj(position);
+  }else{
+    console.log('not a valid fen');
   }
 
   // validate position object

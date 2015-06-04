@@ -1,5 +1,5 @@
 body{
-	background-color: $color-nuetral;
+	background-image: url('../img/checks.png');
 	color: $color-main;
 
 	@include transition(background-color, 0.4s);
@@ -7,24 +7,28 @@ body{
 	.header{
 		padding: 8px 0px;
 
-		background-color: $color-main-light;
+		background-color: $color-main;
 		font-size: 16pt;
 		font-family: $font-body-bold;
 		color: $color-nuetral;
 	}
 
-	.confirm{
-		margin: 40px 0px;
+	.interactive{
 
-		color: $color-main;
+		cursor: pointer;
+		color: $color-accent-light;
 		@include transition(color, 0.2s);
 
 		&:hover{
 			cursor: pointer;
 
-			color: #444;
+			color: $color-main;
 			@include transition(color, 0.4s);
 		}
+	}
+
+	.confirm{
+		margin: 20px 0px;
 	}
 }
 

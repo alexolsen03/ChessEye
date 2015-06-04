@@ -53,7 +53,7 @@
   100% {
     background-color: #ecf0f1; } }
 body {
-  color: #95a5a6;
+  color: #383735;
   font-family: OpenSans; }
 
 .wrapper {
@@ -117,13 +117,13 @@ body {
   display: table; }
 
 .accent {
-  color: #2c3e50; }
+  color: #7a747a; }
 
 .nuetral {
   color: #ecf0f1; }
 
 .main {
-  color: #95a5a6; }
+  color: #383735; }
 
 .main-lt {
   color: #bdc3c7; }
@@ -311,32 +311,34 @@ body {
 
 /* Project Specific Files */
 body {
-  background-color: #ecf0f1;
-  color: #95a5a6;
+  background-image: url("../img/checks.png");
+  color: #383735;
   -webkit-transition: background-color 0.4s ease;
   -moz-transition: background-color 0.4s ease;
   -o-transition: background-color 0.4s ease;
   transition: background-color 0.4s ease; }
   body .header {
     padding: 8px 0px;
-    background-color: #bdc3c7;
+    background-color: #383735;
     font-size: 16pt;
     font-family: OpenSansBold;
     color: #ecf0f1; }
-  body .confirm {
-    margin: 40px 0px;
-    color: #95a5a6;
+  body .interactive {
+    cursor: pointer;
+    color: #938e93;
     -webkit-transition: color 0.2s ease;
     -moz-transition: color 0.2s ease;
     -o-transition: color 0.2s ease;
     transition: color 0.2s ease; }
-    body .confirm:hover {
+    body .interactive:hover {
       cursor: pointer;
-      color: #444;
+      color: #383735;
       -webkit-transition: color 0.4s ease;
       -moz-transition: color 0.4s ease;
       -o-transition: color 0.4s ease;
       transition: color 0.4s ease; }
+  body .confirm {
+    margin: 20px 0px; }
 
 .square-a1, .square-b1, .square-c1, .square-d1, .square-e1, .square-f1, .square-g1, .square-h1,
 .square-a2, .square-b2, .square-c2, .square-d2, .square-e2, .square-f2, .square-g2, .square-h2,
@@ -375,29 +377,15 @@ body {
   height: 475px;
   width: 475px;
   margin: 0px auto;
-  padding-top: 20px; }
-.board-wrapper .confirm {
-  margin: 20px 0px; }
+  padding-top: 20px;
+  padding-left: 150px;
+  padding-right: 150px; }
 .board-wrapper .board-width {
   width: 475px;
   margin: 0px auto; }
   .board-wrapper .board-width .arrow-left,
   .board-wrapper .board-width .arrow-right {
-    padding: 19px 0px;
-    cursor: pointer;
-    color: #95a5a6;
-    -webkit-transition: color 0.2s ease;
-    -moz-transition: color 0.2s ease;
-    -o-transition: color 0.2s ease;
-    transition: color 0.2s ease; }
-    .board-wrapper .board-width .arrow-left:hover,
-    .board-wrapper .board-width .arrow-right:hover {
-      cursor: pointer;
-      color: #444;
-      -webkit-transition: color 0.4s ease;
-      -moz-transition: color 0.4s ease;
-      -o-transition: color 0.4s ease;
-      transition: color 0.4s ease; }
+    padding: 19px 0px; }
   .board-wrapper .board-width .arrow-left {
     float: left; }
   .board-wrapper .board-width .arrow-right {
@@ -407,19 +395,21 @@ body {
   text-align: center; }
   .notation-wrapper #notation {
     display: inline-block;
+    padding: 0px 150px;
     text-align: left;
-    font-family: OpenSans; }
+    font-family: OpenSans;
+    background-color: rgba(255, 255, 255, 0.6); }
     .notation-wrapper #notation #numOfMoves {
       padding: 20px 0px;
       color: #bdc3c7;
-      font-size: 16pt;
+      font-size: 18pt;
       text-align: center;
       -webkit-transition: color 0.2s ease;
       -moz-transition: color 0.2s ease;
       -o-transition: color 0.2s ease;
       transition: color 0.2s ease; }
       .notation-wrapper #notation #numOfMoves:hover {
-        color: #95a5a6;
+        color: #383735;
         -webkit-transition: color 0.5s ease;
         -moz-transition: color 0.5s ease;
         -o-transition: color 0.5s ease;
@@ -435,5 +425,20 @@ body {
       .notation-wrapper #notation .game-notation .movement {
         display: inline-block;
         width: 140px; }
+
+.lightbox {
+  background-color: #fff;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+  border-left: 10px solid rgba(255, 255, 255, 0.6);
+  border-right: 10px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 10px solid rgba(255, 255, 255, 0.6);
+  -webkit-border-radius: 0px 0px 10px 10px;
+  -moz-border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 10px 10px;
+  padding: 30px;
+  text-align: center;
+  display: inline-block; }
 
 /*# sourceMappingURL=styles.css.map */

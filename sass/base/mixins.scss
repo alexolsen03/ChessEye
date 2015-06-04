@@ -1,7 +1,7 @@
-@mixin rounded($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-          border-radius: $radius;
+@mixin rounded($radiusTL, $radiusTR: $radiusTL, $radiusBR: $radiusTL, $radiusBL: $radiusTL) {
+  -webkit-border-radius: $radiusTL $radiusTR $radiusBR $radiusBL;
+     -moz-border-radius: $radiusTL $radiusTR $radiusBR $radiusBL;
+          border-radius: $radiusTL $radiusTR $radiusBR $radiusBL;
 }
 @mixin shadow($x, $y, $blur, $color) {
   -webkit-box-shadow: $x $y $blur $color;
