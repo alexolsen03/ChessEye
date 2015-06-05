@@ -1,0 +1,68 @@
+.notation-wrapper{
+	text-align: center;
+
+	#notation{
+		display: inline-block;
+		padding: 0px 150px;
+
+		text-align: left;
+		font-family: $font-body;
+		background-color: $color-white-transparent;
+
+		#numOfMoves{
+			padding: 20px 0px;
+
+			color: $color-main-light;
+			font-size: 18pt;
+			text-align: center;
+
+			@include transition(color, 0.2s);
+
+			&:hover{
+				color: $color-main;
+
+				@include transition(color, 0.5s);
+			}
+
+			i{
+				cursor: pointer;
+			}
+		}
+
+		.game-notation{
+			padding: 10px 0px;
+
+			font-size: 28pt;
+		
+			.move-no{
+				font-size: 22pt;
+				color: $color-main-light;
+			}
+
+			.movement{
+				display: inline-block;
+				width: 140px;
+			}
+		}
+
+	}
+}
+
+.lightbox{
+	background-color: $color-white;
+	
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
+
+	border-left: 10px solid $color-white-transparent;
+	border-right: 10px solid $color-white-transparent;
+	border-bottom: 10px solid $color-white-transparent;
+
+	@include rounded(0px, 0px, 10px, 10px);
+
+	padding: 30px;
+	text-align: center;
+	display: inline-block;
+}
+
