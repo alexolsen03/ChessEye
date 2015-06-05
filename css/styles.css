@@ -441,4 +441,34 @@ body {
   text-align: center;
   display: inline-block; }
 
+@media only screen and (max-device-width: 480px) {
+  .wrapper {
+    width: 100%; }
+
+  .notation-wrapper .lightbox #notation {
+    float: left;
+    padding-left: 6px; }
+    .notation-wrapper .lightbox #notation .game-notation {
+      font-size: 26pt; }
+
+  .board-wrapper {
+    clear: both; }
+    .board-wrapper #board {
+      height: 325px;
+      width: 325px;
+      padding: 5px;
+      margin: 0px; }
+    .board-wrapper .board-width {
+      width: 325px;
+      margin: 0px;
+      text-align: center; }
+
+  .lightbox {
+    width: 100%;
+    padding: 5px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+    text-align: left; } }
+
 /*# sourceMappingURL=styles.css.map */
