@@ -1,2 +1,3 @@
-baseurl: "/ChessEye"
-url: "http://alexolsen03.github.io"
+baseurl: "/ChessEye/"
+#url: "http://alexolsen03.github.io"
+url: "/ChessEye"

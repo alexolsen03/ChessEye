@@ -1,0 +1,25 @@
+<div class='notation-wrapper'>
+	<div class='lightbox'>
+		<div id="notation">
+			<div id='numOfMoves'>
+				<i class='fa fa-arrow-up' ng-click='incrementCtr()'></i> {{ numOfMoves }} <i class='fa fa-arrow-down' ng-click='decrementCtr()'></i>
+			</div>
+			<div ng-if='loading'>
+				<i class='fa-spinner fa fa-spin fa-5x'></i>
+			</div>
+			<div class='animate' ng-repeat='move in answerPGN.turnByTurn | limitTo: numOfMoves'>
+				<div class='game-notation'>
+		<!-- 			<span class='move-no'>   {{ $index + 1 }}.</span>
+					<span class='movement'>  {{ move.moves[0]  }}</span>
+					<span class='movement'>  {{ move.moves[1] }} </span> -->
+					<span class='move-no'>{{ $index + 1 }}.</span>
+					<span class='movement'> {{ move.split(' ')[0] }} </span>
+					<span class='movement'> {{ move.split(' ')[1] }} </span>
+				</div>
+			</div>
+			<div class='align-c'>
+				<i ui-sref='board({notations: notations})'class='interactive fa-3x fa fa-chevron-circle-right'></i>
+			</div>
+		</div>
+	</div>
+</div>

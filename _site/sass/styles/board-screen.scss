@@ -1,0 +1,29 @@
+.board-wrapper{
+
+	#board{
+		height: $board-size;
+		width: $board-size;
+		margin: 0px auto;
+		padding-top: 20px;
+		padding-left: 150px;
+		padding-right: 150px;
+	}
+
+	.board-width{
+		width: $board-size;
+		margin: 0px auto;
+
+		.arrow-left,
+		.arrow-right{
+			padding: 19px 0px;
+		}
+
+		.arrow-left{
+			float: left;
+		}
+
+		.arrow-right{
+			float: right;
+		}
+	}
+}

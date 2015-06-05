@@ -1,0 +1,29 @@
+@-webkit-keyframes anim_slides{
+    0% { opacity: 0; -webkit-transform: translateX(100px); }
+	3% { opacity: 1; -webkit-transform: translateX(0); }
+	47% { opacity: 1; -webkit-transform: translateX(0); }
+	50% { opacity: 0; -webkit-transform: translateX(-100px); }
+	100% { opacity: 0; -webkit-transform: translateX(-100px); }
+}
+
+@-moz-keyframes anim_slides{
+    0% { opacity: 0; -moz-transform: translateX(100px); }
+	3% { opacity: 1; -moz-transform: translateX(0); }
+	47% { opacity: 1; -moz-transform: translateX(0); }
+	50% { opacity: 0; -moz-transform: translateX(-100px); }
+	100% { opacity: 0; -moz-transform: translateX(-100px); }
+}
+
+@-webkit-keyframes anim_flash_correct{
+	0% { background-color: $color-nuetral; }
+	25% { background-color: green; }
+	75% { background-color: $color-nuetral; }
+	100% {background-color: $color-nuetral; }
+}
+
+@-webkit-keyframes anim_flash_incorrect{
+	0% { background-color: $color-nuetral; }
+	25% { background-color: red; }
+	75% { background-color: $color-nuetral; }
+	100% {background-color: $color-nuetral; }
+}
